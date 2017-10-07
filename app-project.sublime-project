@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				".gitignore",
+				"app-project.sublime-project"
+			],
+			"path": "."
+		}
+	]
+}

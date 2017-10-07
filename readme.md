@@ -4,4 +4,4 @@ To run locally
 1. Install nodejs and npm. Then install gulp package globally    
 2. Locate project folder in terminal      
 3. Type "npm install" to install node packages   
-4. Type "npm run dev" to start the server
+4. Type "npm run dev" to start the server and app

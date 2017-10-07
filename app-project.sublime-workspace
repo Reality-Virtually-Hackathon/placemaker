@@ -1,0 +1,1064 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"co",
+				"container"
+			],
+			[
+				"ca",
+				"caption\t<caption>"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"remo",
+				"removeEventListener"
+			],
+			[
+				"add",
+				"addEventListener"
+			],
+			[
+				"getElementBy",
+				"getElementById"
+			],
+			[
+				"req",
+				"require"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"li",
+				"linkn\tlink - next"
+			],
+			[
+				"scri",
+				"script\tTag"
+			],
+			[
+				"ho",
+				"homepage"
+			],
+			[
+				"se",
+				"section\t<section>"
+			],
+			[
+				"bck",
+				"background-color"
+			],
+			[
+				"flex-",
+				"flex-flow"
+			],
+			[
+				"flex",
+				"flex-direction"
+			],
+			[
+				"List-s",
+				"list-style"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"link",
+				"link\tTag"
+			],
+			[
+				"lin",
+				"linka\tlink - author"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"rg",
+				"rgba()"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"hei",
+				"height"
+			],
+			[
+				"l",
+				"linka\tlink - author"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"ori",
+				"origPos"
+			],
+			[
+				"qyu",
+				"querySelectorAll"
+			],
+			[
+				"new",
+				"newEl"
+			],
+			[
+				"set",
+				"setAttribute"
+			],
+			[
+				"forA",
+				"forEach"
+			],
+			[
+				"pos",
+				"posY"
+			],
+			[
+				"get",
+				"getAttribute"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"anim",
+				"animationElrotation"
+			],
+			[
+				"cosn",
+				"console"
+			],
+			[
+				"car",
+				"carFrontOutParams"
+			],
+			[
+				"type",
+				"typeof"
+			],
+			[
+				"margi",
+				"margin"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"top",
+				"top"
+			],
+			[
+				"cu",
+				"currentBtn"
+			],
+			[
+				"digi",
+				"digitalRead"
+			],
+			[
+				"de",
+				"delayedCall"
+			],
+			[
+				"ser",
+				"seriesName"
+			],
+			[
+				"d",
+				"dispatch"
+			],
+			[
+				"bor",
+				"border"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"process",
+				"processed"
+			],
+			[
+				"regio",
+				"regionOrder"
+			],
+			[
+				"reg",
+				"regions"
+			],
+			[
+				"regi",
+				"regionOrder"
+			],
+			[
+				"del",
+				"delete"
+			],
+			[
+				"dete",
+				"determineWinnerCounterConsumer"
+			],
+			[
+				"fail",
+				"failCounter"
+			],
+			[
+				"block",
+				"blocks"
+			],
+			[
+				"fai",
+				"failCounter"
+			],
+			[
+				"succ",
+				"succCounter"
+			],
+			[
+				"orde",
+				"regionOrder"
+			],
+			[
+				"th",
+				"throw"
+			],
+			[
+				"next",
+				"runNextRegion"
+			],
+			[
+				"or",
+				"regionOrder"
+			],
+			[
+				"cos",
+				"console"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"attach",
+				"attachAdvncedListeners"
+			],
+			[
+				"cli",
+				"clickthroughBtn"
+			],
+			[
+				"tra",
+				"translateY()"
+			],
+			[
+				"key",
+				"keyCounter"
+			],
+			[
+				"the",
+				"theYear"
+			],
+			[
+				"temp",
+				"tempGoddList"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"lookup",
+				"lookupTable"
+			],
+			[
+				"look",
+				"lookupTable"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"inn",
+				"innerHTML"
+			],
+			[
+				"handle",
+				"handleDefaultCarImages"
+			],
+			[
+				"cou",
+				"fuelErrorCounter"
+			],
+			[
+				"st",
+				"style\tTag"
+			],
+			[
+				"ad",
+				"adkit"
+			],
+			[
+				"dele",
+				"deleteExtraData"
+			],
+			[
+				"swi",
+				"switchForDedault"
+			],
+			[
+				"swit",
+				"switch"
+			],
+			[
+				"le",
+				"left"
+			],
+			[
+				"Le",
+				"left"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"defa",
+				"defaultSeries"
+			],
+			[
+				"com",
+				"competitor"
+			],
+			[
+				"cus",
+				"customText"
+			],
+			[
+				"start",
+				"startAd"
+			],
+			[
+				"cars",
+				"carsToCompare"
+			],
+			[
+				"ea",
+				"each"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"pop",
+				"popup87"
+			],
+			[
+				"kbb",
+				"kbbData"
+			],
+			[
+				"vi",
+				"visible"
+			],
+			[
+				"font-s",
+				"font-style"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"visi",
+				"visible"
+			],
+			[
+				"b",
+				"bolder"
+			],
+			[
+				"mi",
+				"min-width"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"t",
+				"top"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"sh",
+				"shotCodes"
+			],
+			[
+				"data",
+				"getData"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"in",
+				"inline"
+			],
+			[
+				"url",
+				"urlParams"
+			],
+			[
+				"lo",
+				"log"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 1191,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "readme.md",
+			"settings":
+			{
+				"buffer_size": 475,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "pack",
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"JSLIN",
+				"JSLint"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Unmanaged Packages"
+			],
+			[
+				"proje",
+				"Project Manager"
+			],
+			[
+				"group",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"project",
+				"Project Manager"
+			],
+			[
+				"mana",
+				"Project Manager"
+			],
+			[
+				"projectmanager",
+				"Project Manager: Add Project"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"livereload.js",
+				"Snippet: Insert livereload.js script"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"set s j",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"task",
+				"Tasks: New document"
+			],
+			[
+				"set s cs",
+				"Set Syntax: CSS"
+			],
+			[
+				"set s ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"set s h",
+				"Set Syntax: HTML"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 540.0
+	},
+	"console":
+	{
+		"height": 52.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/byser_000/Dropbox/Development/WebVR/Hackathon2017/placemaker",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/Hackathon2017/placemaker/js"
+	],
+	"file_history":
+	[
+		"/C/Users/byser_000/Dropbox/Development/WebVR/Hackathon2017/placemaker/New Text Document.txt",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/Toyota_showcase/index.html",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/Toyota_showcase/src/js/modules/carsHandler.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/grab.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/drawCanvas2.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/Toyota_showcase/src/js/modules/utils.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/Toyota_showcase/src/js/index.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/drawCanvas.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/node_modules/aframe-draw-component/index.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/node_modules/aframe-draw-component/package.json",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/build/bundle.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/node_modules/aframe-canvas/package.json",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/examples/dynamic/index.html",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/temp/cube_webgl/cubegl.HTML",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/node_modules/aframe-draw-component/examples/basic/index.html",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/node_modules/aframe-draw-component/examples/index.html",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/package.json",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/examples/mesh/index.html",
+		"/G/Downloads/Tools/Fighter_upgrade_2.5_logo/source/src/Main.ts",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/examples/basic/index.html",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/examples/custom/index.html",
+		"/G/Downloads/Tools/Fighter_upgrade_2.5_logo/source/src/fighter/GameContainer.ts",
+		"/G/Downloads/Tools/Fighter_upgrade_2.5_logo/source/egretProperties.json",
+		"/G/Downloads/Tools/Fighter_upgrade_2.5_logo/source/index.html",
+		"/G/Downloads/Tools/Fighter_upgrade_2.5_logo/release/index.html",
+		"/C/Users/byser_000/Desktop/LoadingUI.ts",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/dist/aframe-teleport-controls.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/index.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/examples/main.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/webpack.dev.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/package.json",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/build.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls/aframe-teleport-controls/index.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/Toyota_showcase/package.json",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/shaders/skyGradient.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/teleport-controls.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/mycomp.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/package.json",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/build/aframe-v0.7.0.min.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/dist/aframe-v0.7.0.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/Toyota_showcase/gulpfile.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/libs/aframe.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/index.html",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/scripts/budo.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/ground.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/js/components/aabb-collider.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/components/grab.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/src/components/aabb-collider.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/firsttest/bs-config.json",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/build/aframe.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/dist/aframe-master.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/src/index.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/examples/showcase/tracked-controls/index.html",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/examples/showcase/tracked-controls/components/grab.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/examples/showcase/tracked-controls/components/aabb-collider.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/bathroom/aframe/examples/showcase/tracked-controls/shaders/skyGradient.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-backend-api-trigada/app.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-automation-app/my_modules/queryStringProcessor.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-automation-app/my_modules/lookupTableSearcher.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-automation-app/my_modules/conquestFileReader.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-automation-app/index.js",
+		"/D/WWW/PROJECTS/kbb/Landing_Page/additionalFunctional/parser_v2-kbb_csv_file_update/x.js",
+		"/D/WWW/PROJECTS/kbb/Landing_Page/additionalFunctional/kbb_id_search_-_determine_winner_report/x.js",
+		"/C/Users/byser_000/Dropbox/Development/Arduino/J5/package.json",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/public/js/bundle.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/public_src/js/index.js",
+		"/D/Development/practice_tests/Async_js/es5/XMLHttpRequests.js",
+		"/D/Development/practice_tests/Async_js/es5/server/server-app.js",
+		"/D/Development/practice_tests/Async_js/es5/client/xmlhttprequest.js",
+		"/D/Development/practice_tests/Async_js/es5/server/accessControl.js",
+		"/D/Development/practice_tests/Async_js/es5/client/client.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/routes/careers.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/routes/home.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/views/home.handlebars",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/public/js/nicdark_plugins.min.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/public/css/plyr.css",
+		"/D/Development/WebDev/Players/plyr-master/package.json",
+		"/D/Development/WebDev/Players/plyr-master/bundles.json",
+		"/D/Development/WebDev/Players/plyr-master/src/less/plyr.less",
+		"/D/Development/WebDev/Players/plyr-master/src/scss/variables.scss",
+		"/D/Development/WebDev/Players/plyr-master/src/scss/plyr.scss",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/public/css/nicdark_style.css",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/routes/contact.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/examples/AutoShowcase/src/js/modules/utils.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-automation-app/my_modules/lookupTableUpdater.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-automation-app/my_modules/lookupTableConverter.js",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-automation-app/my_modules/conquestFileWriter.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/gulpfile.js",
+		"/D/WWW/PROJECTS/kbb/Landing_Page/additionalFunctional/Csv_daily_automation_App/app.js",
+		"/D/Development/WebVR/A-Frame/examples/AutoShowcase/js/functions.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/examples/AutoShowcase/src/js/index.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/README.md",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/bs-config.json",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-backend-api-trigada/configs/settings.json",
+		"/D/Development/Js_references/Helpfull_functions.js",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/js_guide",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/js_help",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/views/register.handlebars",
+		"/D/WWW/PROJECTS/kbb/FINAL_GIT/kbb-backend-api-trigada/cron.js",
+		"/C/Users/byser_000/Desktop/xwifi.txt",
+		"/C/Users/byser_000/Dropbox/Development/Js_references/Helpfull_functions.js",
+		"/D/Stuff/AirVPN_Czech-Republic_SSH-22.ovpn",
+		"/C/Program Files/OpenVPN/config/uk/AirVPN_Ukraine_SSH-22.ovpn",
+		"/C/Program Files/OpenVPN/config/AirVPN_Czech-Republic_SSH-22.ovpn",
+		"/C/Program Files/OpenVPN/AirVPN_Czech-Republic_SSH-22.ovpn",
+		"/C/Program Files/OpenVPN/sample-config/client.ovpn",
+		"/D/бреддор_Дня_арt.txt",
+		"/D/skype_history.txt",
+		"/D/Development/NodeApps/aws-nodejs-sample/text/text.txt",
+		"/D/WWW/1.js",
+		"/D/Development/Mean_workflow.txt",
+		"/C/Program Files/OpenVPN/config/uk/AirVPN_Ukraine_SSH-22.bat",
+		"/C/Program Files/OpenVPN/config/uk/sshtunnel.ppk",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/views/partials/mailform.handlebars",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/routes/sendforms",
+		"/C/Users/byser_000/Dropbox/Development/WebDev/Diana/design-dl/models/helpers.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/examples/AutoShowcase/gulpfile.js",
+		"/C/Users/byser_000/Dropbox/Development/WebVR/A-Frame/examples/AutoShowcase/package.json",
+		"/D/Development/NodeApps/ITVDN_Angular2_Essential/01_Introduction/01_HelloWorldApp/package.json",
+		"/D/Development/NodeApps/ITVDN_Angular2_Essential/01_Introduction/01_HelloWorldApp/systemjs.config.js",
+		"/D/Development/NodeApps/mean_mytasklist/package.json",
+		"/D/Development/NodeApps/ITVDN_Angular2_Essential/01_Introduction/01_HelloWorldApp/typings.json",
+		"/D/Development/NodeApps/mean_mytasklist/client/typings.json",
+		"/D/Development/NodeApps/ITVDN_Angular2_Essential/01_Introduction/02_TypeScriptSamples/02_Types/sample.js",
+		"/D/Development/NodeApps/mean_mytasklist/client/app/app.component.html",
+		"/D/Development/NodeApps/mean_mytasklist/server.js",
+		"/D/Development/NodeApps/mean_mytasklist/views/index.html",
+		"/D/Development/NodeApps/mean_mytasklist/client/systemjs.config.js"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								499,
+								499
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1189,
+										1190
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										0,
+										1
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "readme.md",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 169.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "app-project.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 317.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
