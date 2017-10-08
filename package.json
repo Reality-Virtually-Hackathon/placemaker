@@ -17,6 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "aframe": "^0.7.0",
+    "aframe-fit-texture-component": "^0.2.3",
+    "aframe-slice9-component": "^1.0.0",
     "babel-cli": "^6.22.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",

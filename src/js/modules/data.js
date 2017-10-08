@@ -4,6 +4,12 @@ class Data {
     this.icons = [];
     this.navState = 'default';
     this.navItemMouseOn = {
+	    position: {x:"0", y: "0", z:"-1"},
+	    rotation: "0 0 0",
+	    scale: "0.5 0.5 0.5",
+	    scaleUp: "0.8 0.8 0.8"
+	};
+	this.navItemMouseClick = {
 	    position: {x:"1", y: "1", z:"1"},
 	    rotation: "0 0 0",
 	    scale: "0.5 0.5 0.5",

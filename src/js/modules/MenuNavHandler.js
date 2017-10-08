@@ -39,12 +39,12 @@ class MenuNavHandler{
 				if(!Data.navItemSelected){
 					Data.navItemSelected = true;
 					navItem.navItem.dataset.state = 'selected';
-					navItemFrontIn(object);
+					Animate.navItemFrontIn(navItem);
 				}
 				else if(navItem.navItem.dataset.state == 'selected'){
 					Data.navItemSelected = false;
 					navItem.navItem.dataset.state = 'default';
-					navItemFrontOut(object);
+					Animate.navItemFrontOut(navItem);
 				}
 					
 			});

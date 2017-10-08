@@ -21,7 +21,7 @@ gulp.task('build-js', () => {
               './src/js/modules.js',
               './src/js/functions.js'
               // './src/js/ashaders/*.js',
-              // './src/js/components/*.js'
+              // './src/js/acomponents/aframe-look-at-billboard-component.js'
               ]})
     .bundle()  
     .pipe(source('bundle.js'))

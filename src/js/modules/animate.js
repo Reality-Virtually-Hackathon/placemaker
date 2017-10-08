@@ -1,4 +1,5 @@
 import Utils from './utils';
+import Data from './data';
 
 class Animate{
 	constructor() {
@@ -31,7 +32,7 @@ class Animate{
 	SpecificIn(elm, attribute, values, origparams) {
 	  Utils.createAndSetAttributes('a-animation', elm, attribute, false, function(){}, [
 	    ['attribute', `${attribute}`],
-	    ['to', `${values.x} ${origparams.origPos.y} ${origparams.origPos.z}`],
+	    ['to', `${origparams.origPos.x} ${origparams.origPos.y} ${Data.navItemMouseClick.position.z}`],
 	    ['dur', '900'],
 	    ['easing', 'ease-out']
 	  ]);
@@ -46,6 +47,28 @@ class Animate{
 	  ]);
 	}
 
+
+	navItemFrontIn(icoElm){
+
+		Utils.createAndSetAttributes('a-animation', icoElm.navItem, 'position', false, function(){}, [
+	    ['attribute', 'position'],
+	    ['to', `${icoElm.params.origPos.x} ${icoElm.params.origPos.y} ${Data.navItemMouseClick.position.z}`],
+	    ['dur', '900'],
+	    ['easing', 'ease-out']
+	  ]);
+
+	}
+
+	navItemFrontOut(icoElm){
+
+		Utils.createAndSetAttributes('a-animation', icoElm.navItem, 'position', false, function(){}, [
+	    ['attribute', 'position'],
+	    ['to', `${icoElm.params.origPos.x} ${icoElm.params.origPos.y} ${Data.navItemMouseClick.position.z}`],
+	    ['dur', '900'],
+	    ['easing', 'ease-out']
+	  ]);
+
+	}
 
 
 }

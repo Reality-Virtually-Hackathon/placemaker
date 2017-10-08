@@ -1,4 +1,318 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+if (typeof AFRAME === 'undefined') {
+  throw new Error('Component attempted to register before AFRAME was available.');
+}
+
+/**
+ * Fit Texture component for A-Frame.
+ */
+AFRAME.registerComponent('fit-texture', {
+  dependencies: ['geometry', 'material'],
+  schema: {
+    type: 'boolean',
+    default: true
+  },
+
+  /**
+   * Called once when component is attached. Generally for initial setup.
+   */
+  init: function () { },
+
+  /**
+   * Called when component is attached and when component data changes.
+   * Generally modifies the entity based on the data.
+   */
+   update: function () {
+     if (this.data === false) return;
+
+     var el = this.el;
+     var self = this;
+     if (self.dimensions) {
+       // If texture has already been loaded, and `fit-texture` was reset.
+       self.applyTransformation();
+     } else {
+       var textureLoaded = function(e) {
+
+          var w = e.detail.texture.image.videoWidth || e.detail.texture.image.width;
+          
+          var h = e.detail.texture.image.videoHeight || e.detail.texture.image.height;
+          
+          // Don't apply transformation on incomplete info
+          if(h === 0 || w === 0) return;
+          
+          // Save dimensions for later updates to `fit-texture`, see above.
+          self.dimensions = {w:w, h:h};
+          
+          self.applyTransformation();
+       }
+       el.addEventListener('materialvideoloadeddata', textureLoaded);
+       el.addEventListener('materialtextureloaded', textureLoaded);
+      
+     }
+   },
+   
+   applyTransformation: function () {
+    var el = this.el;
+    var geometry = el.getAttribute('geometry');
+
+    // Use self.dimension data from previous texture/video loaded events
+    var widthHeightRatio = this.dimensions.h / this.dimensions.w;
+
+    if (geometry.width && geometry.height) {
+      console.warn('Using `fit-texture` component on an element with both width and height. Therefore keeping width and changing height to fit the texture. If you want to manually set both width and height, set `fit-texture="false"`. ');
+    }
+    if (geometry.width) {
+      el.setAttribute('height', geometry.width * widthHeightRatio);
+    } else if (geometry.height) {
+      el.setAttribute('width', geometry.height / widthHeightRatio);
+    } else {
+      // Neither width nor height is set.
+      var tempWidth = 1.0;
+      el.setAttribute('width', '' + tempWidth);
+      el.setAttribute('height', tempWidth * widthHeightRatio);
+    }
+  },
+
+  /**
+   * Called when a component is removed (e.g., via removeAttribute).
+   * Generally undoes all modifications to the entity.
+   */
+  remove: function () { },
+
+  /**
+   * Called on each scene tick.
+   */
+  // tick: function (t) { },
+
+  /**
+   * Called when entity pauses.
+   * Use to stop or remove any dynamic or background behavior such as events.
+   */
+  pause: function () { },
+
+  /**
+   * Called when entity resumes.
+   * Use to continue or add any dynamic or background behavior such as events.
+   */
+  play: function () { },
+});
+
+},{}],2:[function(require,module,exports){
+/* global AFRAME */
+
+if (typeof AFRAME === 'undefined') {
+  throw new Error('Component attempted to register before AFRAME was available.');
+}
+
+/**
+ * Slice9 component for A-Frame.
+ */
+AFRAME.registerComponent('slice9', {
+  schema: {
+    width: {default: 1, min: 0},
+    height: {default: 1, min: 0},
+    left: {default: 0, min: 0},
+    right: {default: 0, min: 0},
+    bottom: {default: 0, min: 0},
+    top: {default: 0, min: 0},
+    side: {default: 'front', oneOf: ['front', 'back', 'double']},
+    padding: {default: 0.1, min: 0.01},
+    color: {type: 'color', default: '#fff'},
+    opacity: {default: 1.0, min: 0, max: 1},
+    transparent: {default: true},
+    debug: {default: false},
+    src: {type: 'map'}
+  },
+
+  /**
+   * Set if component needs multiple instancing.
+   */
+  multiple: false,
+
+  /**
+   * Called once when component is attached. Generally for initial setup.
+   */
+  init: function () {
+    var data = this.data;
+    var material = this.material = new THREE.MeshBasicMaterial({color: data.color, opacity: data.opacity, transparent: data.transparent, wireframe: data.debug});
+    var geometry = this.geometry = new THREE.PlaneBufferGeometry(data.width, data.height, 3, 3);
+
+    var textureLoader = new THREE.TextureLoader();
+    this.plane = new THREE.Mesh(geometry, material);
+    this.el.setObject3D('mesh', this.plane);
+    this.textureSrc = null;
+  },
+
+  updateMap: function () {
+    var src = this.data.src;
+
+    if (src) {
+      if (src === this.textureSrc) { return; }
+      // Texture added or changed.
+      this.textureSrc = src;
+      this.el.sceneEl.systems.material.loadTexture(src, {src: src}, setMap.bind(this));
+      return;
+    }
+
+    // Texture removed.
+    if (!this.material.map) { return; }
+    setMap(null);
+
+
+    function setMap (texture) {
+      this.material.map = texture;
+      this.material.needsUpdate = true;
+      this.regenerateMesh();
+    }
+  },
+
+  regenerateMesh: function () {
+    var data = this.data;
+    var pos = this.geometry.attributes.position.array;
+    var uvs = this.geometry.attributes.uv.array;
+    var image = this.material.map.image;
+
+    if (!image) {return;}
+
+    /*
+      0--1------------------------------2--3
+      |  |                              |  |
+      4--5------------------------------6--7
+      |  |                              |  |
+      |  |                              |  |
+      |  |                              |  |
+      8--9-----------------------------10--11
+      |  |                              |  |
+      12-13----------------------------14--15
+    */
+    function setPos(id, x, y) {
+      pos[3 * id] = x;
+      pos[3 * id + 1] = y;
+    }
+
+    function setUV(id, u, v) {
+      uvs[2 * id] = u;
+      uvs[2 * id + 1] = v;
+    }
+
+    // Update UVS
+    var uv = {
+      left: data.left / image.width,
+      right: data.right / image.width,
+      top: data.top / image.height,
+      bottom: data.bottom / image.height
+    };
+
+    setUV(1,  uv.left,  1);
+    setUV(2,  uv.right, 1);
+
+    setUV(4,  0,        uv.bottom);
+    setUV(5,  uv.left,  uv.bottom);
+    setUV(6,  uv.right, uv.bottom);
+    setUV(7,  1,        uv.bottom);
+
+    setUV(8,  0,        uv.top);
+    setUV(9,  uv.left,  uv.top);
+    setUV(10, uv.right, uv.top);
+    setUV(11, 1,        uv.top);
+
+    setUV(13, uv.left,  0);
+    setUV(14, uv.right, 0);
+
+    // Update vertex positions
+    var w2 = data.width / 2;
+    var h2 = data.height / 2;
+    var left = -w2 + data.padding;
+    var right = w2 - data.padding;
+    var top = h2 - data.padding;
+    var bottom = -h2 + data.padding;
+
+    setPos(0, -w2,    h2);
+    setPos(1, left,   h2);
+    setPos(2, right,  h2);
+    setPos(3, w2,     h2);
+
+    setPos(4, -w2,    top);
+    setPos(5, left,   top);
+    setPos(6, right,  top);
+    setPos(7, w2,     top);
+
+    setPos(8, -w2,    bottom);
+    setPos(9, left,   bottom);
+    setPos(10, right, bottom);
+    setPos(11, w2,    bottom);
+
+    setPos(13, left,  -h2);
+    setPos(14, right, -h2);
+    setPos(12, -w2,   -h2);
+    setPos(15, w2,    -h2);
+
+    this.geometry.attributes.position.needsUpdate = true;
+    this.geometry.attributes.uv.needsUpdate = true;
+  },
+
+  /**
+   * Called when component is attached and when component data changes.
+   * Generally modifies the entity based on the data.
+   */
+   update: function (oldData) {
+     var data = this.data;
+
+     this.material.color.setStyle(data.color);
+     this.material.opacity = data.opacity;
+     this.material.transparent = data.transparent;
+     this.material.wireframe = data.debug;
+     this.material.side = parseSide(data.side);
+
+     var diff = AFRAME.utils.diff(data, oldData);
+     if ('src' in diff) {
+       this.updateMap();
+     }
+     else if ('width' in diff || 'height' in diff || 'padding' in diff || 'left' in diff || 'top' in diff || 'bottom' in diff || 'right' in diff) {
+       this.regenerateMesh();
+     }
+   },
+
+  /**
+   * Called when a component is removed (e.g., via removeAttribute).
+   * Generally undoes all modifications to the entity.
+   */
+  remove: function () { },
+
+  /**
+   * Called on each scene tick.
+   */
+  // tick: function (t) { },
+
+  /**
+   * Called when entity pauses.
+   * Use to stop or remove any dynamic or background behavior such as events.
+   */
+  pause: function () { },
+
+  /**
+   * Called when entity resumes.
+   * Use to continue or add any dynamic or background behavior such as events.
+   */
+  play: function () { }
+});
+
+function parseSide (side) {
+  switch (side) {
+    case 'back': {
+      return THREE.BackSide;
+    }
+    case 'double': {
+      return THREE.DoubleSide;
+    }
+    default: {
+      // Including case `front`.
+      return THREE.FrontSide;
+    }
+  }
+}
+
+},{}],3:[function(require,module,exports){
 (function (global){
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.AFRAME = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 (function (process){
@@ -82423,7 +82737,7 @@ module.exports = getWakeLock();
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],2:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 var _utils = require('./modules/utils');
@@ -82452,16 +82766,24 @@ console.log("functions runned ");window.functions = {};
 	};
 })(window);
 
-},{"./modules/MenuNavHandler":4,"./modules/data":6,"./modules/utils":7}],3:[function(require,module,exports){
+},{"./modules/MenuNavHandler":6,"./modules/data":8,"./modules/utils":9}],5:[function(require,module,exports){
 'use strict';
 
 var _aframe = require('aframe');
 
 var aframe = _interopRequireWildcard(_aframe);
 
+var _aframeFitTextureComponent = require('aframe-fit-texture-component');
+
+var fittexture = _interopRequireWildcard(_aframeFitTextureComponent);
+
+var _aframeSlice9Component = require('aframe-slice9-component');
+
+var slice9 = _interopRequireWildcard(_aframeSlice9Component);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-},{"aframe":1}],4:[function(require,module,exports){
+},{"aframe":3,"aframe-fit-texture-component":1,"aframe-slice9-component":2}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -82525,11 +82847,11 @@ var MenuNavHandler = function () {
 					if (!_data2.default.navItemSelected) {
 						_data2.default.navItemSelected = true;
 						navItem.navItem.dataset.state = 'selected';
-						navItemFrontIn(object);
+						_animate2.default.navItemFrontIn(navItem);
 					} else if (navItem.navItem.dataset.state == 'selected') {
 						_data2.default.navItemSelected = false;
 						navItem.navItem.dataset.state = 'default';
-						navItemFrontOut(object);
+						_animate2.default.navItemFrontOut(navItem);
 					}
 				});
 				navItem.navItem.addEventListener('mouseenter', function () {
@@ -82553,7 +82875,7 @@ var MenuNavHandler = function () {
 
 exports.default = new MenuNavHandler();
 
-},{"./animate":5,"./data":6,"./utils":7}],5:[function(require,module,exports){
+},{"./animate":7,"./data":8,"./utils":9}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -82565,6 +82887,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _utils = require('./utils');
 
 var _utils2 = _interopRequireDefault(_utils);
+
+var _data = require('./data');
+
+var _data2 = _interopRequireDefault(_data);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -82593,13 +82919,27 @@ var Animate = function () {
 	}, {
 		key: 'SpecificIn',
 		value: function SpecificIn(elm, attribute, values, origparams) {
-			_utils2.default.createAndSetAttributes('a-animation', elm, attribute, false, function () {}, [['attribute', '' + attribute], ['to', values.x + ' ' + origparams.origPos.y + ' ' + origparams.origPos.z], ['dur', '900'], ['easing', 'ease-out']]);
+			_utils2.default.createAndSetAttributes('a-animation', elm, attribute, false, function () {}, [['attribute', '' + attribute], ['to', origparams.origPos.x + ' ' + origparams.origPos.y + ' ' + _data2.default.navItemMouseClick.position.z], ['dur', '900'], ['easing', 'ease-out']]);
 		}
 	}, {
 		key: 'SpecificOut',
 		value: function SpecificOut(elm, attribute, origparams, values) {
 
 			_utils2.default.createAndSetAttributes('a-animation', elm, attribute, false, function () {}, [['attribute', '' + attribute], ['to', origparams.origPos.x + ' ' + origparams.origPos.y + ' ' + origparams.origPos.z], ['dur', '900'], ['easing', 'ease-out']]);
+		}
+	}, {
+		key: 'navItemFrontIn',
+		value: function navItemFrontIn(icoElm) {
+			// this.SpecificIn(icoElm, 'position', Data.navItemMouseClick.position, navItem.params);
+
+			_utils2.default.createAndSetAttributes('a-animation', icoElm.navItem, 'position', false, function () {}, [['attribute', 'position'], ['to', icoElm.params.origPos.x + ' ' + icoElm.params.origPos.y + ' ' + _data2.default.navItemMouseClick.position.z], ['dur', '900'], ['easing', 'ease-out']]);
+		}
+	}, {
+		key: 'navItemFrontOut',
+		value: function navItemFrontOut(icoElm) {
+			// this.SpecificIn(icoElm, 'position', Data.navItemMouseClick.position, navItem.params);
+
+			_utils2.default.createAndSetAttributes('a-animation', icoElm.navItem, 'position', false, function () {}, [['attribute', 'position'], ['to', icoElm.params.origPos.x + ' ' + icoElm.params.origPos.y + ' ' + _data2.default.navItemMouseClick.position.z], ['dur', '900'], ['easing', 'ease-out']]);
 		}
 	}]);
 
@@ -82608,7 +82948,7 @@ var Animate = function () {
 
 exports.default = new Animate();
 
-},{"./utils":7}],6:[function(require,module,exports){
+},{"./data":8,"./utils":9}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -82627,6 +82967,12 @@ var Data = function () {
 				this.icons = [];
 				this.navState = 'default';
 				this.navItemMouseOn = {
+						position: { x: "0", y: "0", z: "-1" },
+						rotation: "0 0 0",
+						scale: "0.5 0.5 0.5",
+						scaleUp: "0.8 0.8 0.8"
+				};
+				this.navItemMouseClick = {
 						position: { x: "1", y: "1", z: "1" },
 						rotation: "0 0 0",
 						scale: "0.5 0.5 0.5",
@@ -82661,7 +83007,7 @@ var Data = function () {
 
 exports.default = new Data();
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -82700,7 +83046,7 @@ var Utils = function () {
 			var func = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 			var attrs = arguments[5];
 
-			//this.clearElement(parentEl, className);
+			this.clearElement(parentEl, className);
 			var newEl = document.createElement(el);
 			if (reqEvent) newEl.addEventListener('animationend', function () {
 				func(parentEl, className);
@@ -82747,4 +83093,4 @@ var Utils = function () {
 
 exports.default = new Utils();
 
-},{}]},{},[3,2]);
+},{}]},{},[5,4]);

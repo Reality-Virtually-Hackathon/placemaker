@@ -5,7 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>PlaceMaker demo app</title>
   <link rel="stylesheet" href="">
+  
   <script type="text/javascript" src="bundle.js?v=<?php echo uniqid(); ?>"></script>
+  <script src="https://rawgit.com/blairmacintyre/aframe-look-at-billboard-component/master/dist/aframe-look-at-billboard-component.min.js"></script>
+
 </head>
 <body>
     <a-scene>
@@ -22,17 +25,41 @@
         <img id="ico3" class="navAsset" src="assets/icons/3_Recreation.png">
         <img id="ico4" class="navAsset" src="assets/icons/4_Health.png">
         <img id="ico5" class="navAsset" src="assets/icons/5_Homes.png">
+        <img id="ground" src="assets/images/cambridgemap.jpg">
       </a-assets>
+      
+      <!-- Camera + Cursor -->
+      <a-entity position="0 0 0" rotation="0 0 0">
+        <a-camera id="player" class="camera" rotation="-20 -170 0">
+          <a-cursor>
+            <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+          </a-cursor>
+        </a-camera>
+      </a-entity>
+
 
       <!-- ICONS -->
-      <a-entity id="navHolder" scale="0.3 0.3 0.3" position="0 1 0">
+      <a-entity id="navHolder" position="0 0 0" rotation="0 -20 0">
         <!--  -->
-        <a-curvedimage id="tempItem" class='navItem' src="#ico1" height="0.650" position="0 1 0"  radius="3.680" theta-length="18.4" scale="0.9 0.9 0.9" rotation="0 -390 0" position="0 1.2 0" transparent="true" data-ico='back' data-state="default">
-          <a-animation class="arotation" attribute="rotation" from="0 -420 0" to="0 -390 0" dur="1200" delay="100"
+        <!-- <a-image id="tempItem" class='navItem' src="#ico1" position="0 1 0" transparent="true" data-ico='back' data-state="default" fit-texture scale="2.0">
+
+         <a-animation class="rotation" attribute="rotation" from="0 -420 0" to="0 -390 0" dur="5200" delay="100"
+                     fill="both"></a-animation>
+          <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100"
+         fill="both"></a-animation>
+        </a-image> -->
+
+      <!--  -->
+
+        <a-curvedimage id="tempItem" class='navItem' src="#ico1" height="0.650" position="0 1 0"  radius="3.680" theta-length="18.4" scale="1 1 1" rotation="0 -390 0" position="0 1.2 0" transparent="true" data-ico='back' data-state="default">
+          <a-animation class="rotation" attribute="rotation" from="0 -420 0" to="0 -390 0" dur="1200" delay="100"
                      fill="both"></a-animation>
           <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100"
          fill="both"></a-animation>
         </a-curvedimage>
+
+      <!--  -->
+
       <!-- / ICONS -->
        </a-entity>
        <!-- SCULPTURE -->
@@ -40,18 +67,22 @@
         <a-collada-model position="-3 0 -1.5" rotation="0 95 0" scale="2.15 2.15 2.15" src="#sculpture" class="cube" color="red" canvas-material="width:500;height:500"></a-collada-model>
       </a-entity>
        <!-- / SCULPTURE -->
+      
+      <!-- Test Things -->
+      <!-- ToolTip -->
+      <!-- <a-entity slice9="width: 2; height: 3; left: 690; right: 43; top: 838; bottom: 43; src: assets/images/Sculpture.png" position="0 1 -2"></a-entity> -->
 
-      <a-entity>
-        <a-obj-model src="#sofa-obj" mtl="#sofa-mtl" position="0 0.1 0" scale="1 1 1"></a-obj-model>
+      <a-entity id="map" opacity="0">
+        <a-plane src="#ground" position="0 -1.5 2" rotation="-90 -180 0" scale="12 8 8" width="2" height="1.7" transparent="true" rotation="-90 -180 0">
+          <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100"
+         fill="both"></a-animation>
+        </a-plane>
+        <!-- <a-entity geometry="primitive: plane;" material="opacity: 0.9; transparent: true; src: url(assets/images/cambridgemap.jpg)" transparent="true" scale="12 8 8" rotation="-90 -180 0"> -->
+        <!-- <a-image src="#ground" position="0 -1.5 -1" rotation="-80 0 0" fit-texture scale="2.0"> -->
       </a-entity>
 
-      <a-entity position="0 0 0" rotation="0 0 0">
-        <a-camera class="camera" rotation="20 -170 0">
-          <a-cursor>
-            <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-          </a-cursor>
-        </a-camera>
-      </a-entity>
+
+      
       <a-sky color="#ECECEC" src="assets/images/Media_Lab_Lobby.jpg" phi-start='180'></a-sky>
       <a-light type="directional" color="#fff" intensity="0.2" position="-1 2 1"></a-light>
       <a-light type="ambient" color="#fff"></a-light>
