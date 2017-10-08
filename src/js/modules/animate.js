@@ -1,9 +1,11 @@
 import Utils from './utils';
 import Data from './data';
 
+
+
 class Animate{
 	constructor() {
-    
+    this.mapState = false;
   	}
 
 	ScaleIn(elm, scaleF) {
@@ -68,6 +70,33 @@ class Animate{
 	    ['easing', 'ease-out']
 	  ]);
 
+	}
+
+	showMap(){
+		if(!this.mapState){
+			Utils.createAndSetAttributes('a-animation', Data.mapElement, 'opacity', false, function(){}, [
+		    ['attribute', 'opacity'],
+		    ['from', '0'],
+		    ['to', '1'],
+		    ['dur', '1500'],
+		    ['fill', 'both'],
+		    ['easing', 'ease-out']
+		  ]);
+			this.mapState = !this.mapState;
+		}
+	}
+	hideMap(){
+		if(this.mapState){
+			Utils.createAndSetAttributes('a-animation', Data.mapElement, 'opacity', false, function(){}, [
+		    ['attribute', 'opacity'],
+		    ['from', '1'],
+		    ['to', '0'],
+		    ['dur', '1500'],
+		    ['fill', 'both'],
+		    ['easing', 'ease-out']
+		  ]);
+			this.mapState = !this.mapState;
+		}
 	}
 
 

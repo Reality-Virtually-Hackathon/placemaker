@@ -1,6 +1,7 @@
 import Data from './data';
 import Utils from './utils';
 import Animate from './animate';
+import Navigator from './navigator';
 
 class MenuNavHandler{
 	constructor() {
@@ -21,8 +22,11 @@ class MenuNavHandler{
 		  	Utils.setAttributes(navItem, [
 			    ['position', `0 ${yPos} 0`], ['src', `#${Data.navAssets[i].id}`]
 			]);
-			navItem.position = `0 ${yPos} 0`.split(' ');	
-			console.log(navItem.position);
+			navItem.position = `0 ${yPos} 0`.split(' ');
+			navItem.dataset.navto = Data.navToSets[i];
+
+			// console.log(`${navItem.id} ${navItem.dataset.navto}`);
+
 			Data.icons.push({navItem: navItem, params: {
 				origPos: {x:navItem.position[0], y:navItem.position[1], z:navItem.position[2]},//String(navItem.getAttribute('position').toString().replace(/[,]/g, ' ')),
 				origRot: yRot,
@@ -40,11 +44,13 @@ class MenuNavHandler{
 					Data.navItemSelected = true;
 					navItem.navItem.dataset.state = 'selected';
 					Animate.navItemFrontIn(navItem);
+					Navigator.navMeTo(navItem.navItem.dataset.navto);
 				}
 				else if(navItem.navItem.dataset.state == 'selected'){
 					Data.navItemSelected = false;
 					navItem.navItem.dataset.state = 'default';
 					Animate.navItemFrontOut(navItem);
+					Animate.hideMap();
 				}
 					
 			});
@@ -64,6 +70,10 @@ class MenuNavHandler{
 			});
 		});//forEach
 	}	
+
+	buildLayout(){
+		
+	}
 }
 
 export default (new MenuNavHandler);

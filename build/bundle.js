@@ -98,6 +98,291 @@ AFRAME.registerComponent('fit-texture', {
 });
 
 },{}],2:[function(require,module,exports){
+/**
+ * Layout component for A-Frame.
+ * Some layouts adapted from http://www.vb-helper.com/tutorial_platonic_solids.html
+ */
+AFRAME.registerComponent('layout', {
+  schema: {
+    angle: {type: 'number', default: false, min: 0, max: 360, if: {type: ['circle']}},
+    columns: {default: 1, min: 0, if: {type: ['box']}},
+    margin: {default: 1, min: 0, if: {type: ['box', 'line']}},
+    plane: {default: 'xy'},
+    radius: {default: 1, min: 0, if: {type: ['circle', 'cube', 'dodecahedron', 'pyramid']}},
+    reverse: {default: false},
+    type: {default: 'line', oneOf: ['box', 'circle', 'cube', 'dodecahedron', 'line',
+                                    'pyramid']},
+    fill: {default: true, if: {type: ['circle']}}
+  },
+
+  /**
+   * Store initial positions in case need to reset on component removal.
+   */
+  init: function () {
+    var self = this;
+    var el = this.el;
+
+    this.children = el.getChildEntities();
+    this.initialPositions = [];
+
+    this.children.forEach(function getInitialPositions (childEl) {
+      if (childEl.hasLoaded) { return _getPositions(); }
+      childEl.addEventListener('loaded', _getPositions);
+      function _getPositions () {
+        var position = childEl.getAttribute('position');
+        self.initialPositions.push([position.x, position.y, position.z]);
+      }
+    });
+
+    el.addEventListener('child-attached', function (evt) {
+      // Only update if direct child attached.
+      if (evt.detail.el.parentNode !== el) { return; }
+      self.children.push(evt.detail.el);
+      self.update();
+    });
+
+    el.addEventListener('child-detached', function (evt) {
+      // Only update if direct child detached.
+      if (self.children.indexOf(evt.detail.el) === -1) { return; }
+      self.children.splice(self.children.indexOf(evt.detail.el), 1);
+      self.initialPositions.splice(self.children.indexOf(evt.detail.el), 1);
+      self.update();
+    });
+  },
+
+  /**
+   * Update child entity positions.
+   */
+  update: function (oldData) {
+    var children = this.children;
+    var data = this.data;
+    var el = this.el;
+    var numChildren = children.length;
+    var positionFn;
+    var positions;
+    var startPosition = el.getAttribute('position');
+
+    // Calculate different positions based on layout shape.
+    switch (data.type) {
+      case 'box': {
+        positionFn = getBoxPositions;
+        break;
+      }
+      case 'circle': {
+        positionFn = getCirclePositions;
+        break;
+      }
+      case 'cube': {
+        positionFn = getCubePositions;
+        break;
+      }
+      case 'dodecahedron': {
+        positionFn = getDodecahedronPositions;
+        break;
+      }
+      case 'pyramid': {
+        positionFn = getPyramidPositions;
+        break;
+      }
+      default: {
+        // Line.
+        positionFn = getLinePositions;
+      }
+    }
+
+    positions = positionFn(data, numChildren, startPosition);
+    if (data.reverse) { positions.reverse(); }
+    setPositions(children, positions);
+  },
+
+  /**
+   * Reset positions.
+   */
+  remove: function () {
+    this.el.removeEventListener('child-attached', this.childAttachedCallback);
+    setPositions(this.children, this.initialPositions);
+  }
+});
+
+/**
+ * Get positions for `box` layout.
+ */
+function getBoxPositions (data, numChildren, startPosition) {
+  var position;
+  var positions = [];
+  var rows = Math.ceil(numChildren / data.columns);
+
+  for (var row = 0; row < rows; row++) {
+    for (var column = 0; column < data.columns; column++) {
+      position = [0, 0, 0];
+      if (data.plane.indexOf('x') === 0) {
+        position[0] = column * data.margin;
+      }
+      if (data.plane.indexOf('y') === 0) {
+        position[1] = column * data.margin;
+      }
+      if (data.plane.indexOf('y') === 1) {
+        position[1] = row * data.margin;
+      }
+      if (data.plane.indexOf('z') === 1) {
+        position[2] = row * data.margin;
+      }
+      positions.push(position);
+    }
+  }
+
+  return positions;
+}
+module.exports.getBoxPositions = getBoxPositions;
+
+/**
+ * Get positions for `circle` layout.
+ */
+function getCirclePositions (data, numChildren, startPosition) {
+  var positions = [];
+
+  for (var i = 0; i < numChildren; i++) {
+    var rad;
+
+    if (isNaN(data.angle)) {
+      rad = i * (2 * Math.PI) / numChildren;
+    } else {
+      rad = i * data.angle * 0.01745329252;  // Angle to radian.
+    }
+
+    var position = [
+      startPosition.x,
+      startPosition.y,
+      startPosition.z
+    ];
+    if (data.plane.indexOf('x') === 0) {
+      position[0] += data.radius * Math.cos(rad);
+    }
+    if (data.plane.indexOf('y') === 0) {
+      position[1] += data.radius * Math.cos(rad);
+    }
+    if (data.plane.indexOf('y') === 1) {
+      position[1] += data.radius * Math.sin(rad);
+    }
+    if (data.plane.indexOf('z') === 1) {
+      position[2] += data.radius * Math.sin(rad);
+    }
+    positions.push(position);
+  }
+  return positions;
+}
+module.exports.getCirclePositions = getCirclePositions;
+
+/**
+ * Get positions for `line` layout.
+ * TODO: 3D margins.
+ */
+function getLinePositions (data, numChildren, startPosition) {
+  data.columns = numChildren;
+  return getBoxPositions(data, numChildren, startPosition);
+}
+module.exports.getLinePositions = getLinePositions;
+
+/**
+ * Get positions for `cube` layout.
+ */
+function getCubePositions (data, numChildren, startPosition) {
+  return transform([
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+    [-1, 0, 0],
+    [0, -1, 0],
+    [0, 0, -1],
+  ], startPosition, data.radius / 2);
+}
+module.exports.getCubePositions = getCubePositions;
+
+/**
+ * Get positions for `dodecahedron` layout.
+ */
+function getDodecahedronPositions (data, numChildren, startPosition) {
+  var PHI = (1 + Math.sqrt(5)) / 2;
+  var B = 1 / PHI;
+  var C = 2 - PHI;
+  var NB = -1 * B;
+  var NC = -1 * C;
+
+  return transform([
+    [-1, C, 0],
+    [-1, NC, 0],
+    [0, -1, C],
+    [0, -1, NC],
+    [0, 1, C],
+    [0, 1, NC],
+    [1, C, 0],
+    [1, NC, 0],
+    [B, B, B],
+    [B, B, NB],
+    [B, NB, B],
+    [B, NB, NB],
+    [C, 0, 1],
+    [C, 0, -1],
+    [NB, B, B],
+    [NB, B, NB],
+    [NB, NB, B],
+    [NB, NB, NB],
+    [NC, 0, 1],
+    [NC, 0, -1],
+  ], startPosition, data.radius / 2);
+}
+module.exports.getDodecahedronPositions = getDodecahedronPositions;
+
+/**
+ * Get positions for `pyramid` layout.
+ */
+function getPyramidPositions (data, numChildren, startPosition) {
+  var SQRT_3 = Math.sqrt(3);
+  var NEG_SQRT_1_3 = -1 / Math.sqrt(3);
+  var DBL_SQRT_2_3 = 2 * Math.sqrt(2 / 3);
+
+  return transform([
+    [0, 0, SQRT_3 + NEG_SQRT_1_3],
+    [-1, 0, NEG_SQRT_1_3],
+    [1, 0, NEG_SQRT_1_3],
+    [0, DBL_SQRT_2_3, 0]
+  ], startPosition, data.radius / 2);
+}
+module.exports.getPyramidPositions = getPyramidPositions;
+
+/**
+ * Multiply all coordinates by a scale factor and add translate.
+ *
+ * @params {array} positions - Array of coordinates in array form.
+ * @returns {array} positions
+ */
+function transform (positions, translate, scale) {
+  translate = [translate.x, translate.y, translate.z];
+  return positions.map(function (position) {
+    return position.map(function (point, i) {
+      return point * scale + translate[i];
+    });
+  });
+};
+
+/**
+ * Set position on child entities.
+ *
+ * @param {array} els - Child entities to set.
+ * @param {array} positions - Array of coordinates.
+ */
+function setPositions (els, positions) {
+  els.forEach(function (el, i) {
+    var position = positions[i];
+    el.setAttribute('position', {
+      x: position[0],
+      y: position[1],
+      z: position[2]
+    });
+  });
+}
+
+},{}],3:[function(require,module,exports){
 /* global AFRAME */
 
 if (typeof AFRAME === 'undefined') {
@@ -312,7 +597,7 @@ function parseSide (side) {
   }
 }
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 (function (global){
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.AFRAME = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 (function (process){
@@ -82737,7 +83022,7 @@ module.exports = getWakeLock();
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 var _utils = require('./modules/utils');
@@ -82766,7 +83051,7 @@ console.log("functions runned ");window.functions = {};
 	};
 })(window);
 
-},{"./modules/MenuNavHandler":6,"./modules/data":8,"./modules/utils":9}],5:[function(require,module,exports){
+},{"./modules/MenuNavHandler":7,"./modules/data":9,"./modules/utils":11}],6:[function(require,module,exports){
 'use strict';
 
 var _aframe = require('aframe');
@@ -82781,9 +83066,13 @@ var _aframeSlice9Component = require('aframe-slice9-component');
 
 var slice9 = _interopRequireWildcard(_aframeSlice9Component);
 
+var _aframeLayoutComponent = require('aframe-layout-component');
+
+var loyouthelper = _interopRequireWildcard(_aframeLayoutComponent);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-},{"aframe":3,"aframe-fit-texture-component":1,"aframe-slice9-component":2}],6:[function(require,module,exports){
+},{"aframe":4,"aframe-fit-texture-component":1,"aframe-layout-component":2,"aframe-slice9-component":3}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -82803,6 +83092,10 @@ var _utils2 = _interopRequireDefault(_utils);
 var _animate = require('./animate');
 
 var _animate2 = _interopRequireDefault(_animate);
+
+var _navigator = require('./navigator');
+
+var _navigator2 = _interopRequireDefault(_navigator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -82829,7 +83122,10 @@ var MenuNavHandler = function () {
 					yPos += 1;
 					_utils2.default.setAttributes(navItem, [['position', '0 ' + yPos + ' 0'], ['src', '#' + _data2.default.navAssets[i].id]]);
 					navItem.position = ('0 ' + yPos + ' 0').split(' ');
-					console.log(navItem.position);
+					navItem.dataset.navto = _data2.default.navToSets[i];
+
+					// console.log(`${navItem.id} ${navItem.dataset.navto}`);
+
 					_data2.default.icons.push({ navItem: navItem, params: {
 							origPos: { x: navItem.position[0], y: navItem.position[1], z: navItem.position[2] }, //String(navItem.getAttribute('position').toString().replace(/[,]/g, ' ')),
 							origRot: yRot,
@@ -82848,10 +83144,12 @@ var MenuNavHandler = function () {
 						_data2.default.navItemSelected = true;
 						navItem.navItem.dataset.state = 'selected';
 						_animate2.default.navItemFrontIn(navItem);
+						_navigator2.default.navMeTo(navItem.navItem.dataset.navto);
 					} else if (navItem.navItem.dataset.state == 'selected') {
 						_data2.default.navItemSelected = false;
 						navItem.navItem.dataset.state = 'default';
 						_animate2.default.navItemFrontOut(navItem);
+						_animate2.default.hideMap();
 					}
 				});
 				navItem.navItem.addEventListener('mouseenter', function () {
@@ -82868,6 +83166,9 @@ var MenuNavHandler = function () {
 				});
 			}); //forEach
 		}
+	}, {
+		key: 'buildLayout',
+		value: function buildLayout() {}
 	}]);
 
 	return MenuNavHandler;
@@ -82875,7 +83176,7 @@ var MenuNavHandler = function () {
 
 exports.default = new MenuNavHandler();
 
-},{"./animate":7,"./data":8,"./utils":9}],7:[function(require,module,exports){
+},{"./animate":8,"./data":9,"./navigator":10,"./utils":11}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -82899,6 +83200,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Animate = function () {
 	function Animate() {
 		_classCallCheck(this, Animate);
+
+		this.mapState = false;
 	}
 
 	_createClass(Animate, [{
@@ -82930,16 +83233,30 @@ var Animate = function () {
 	}, {
 		key: 'navItemFrontIn',
 		value: function navItemFrontIn(icoElm) {
-			// this.SpecificIn(icoElm, 'position', Data.navItemMouseClick.position, navItem.params);
 
 			_utils2.default.createAndSetAttributes('a-animation', icoElm.navItem, 'position', false, function () {}, [['attribute', 'position'], ['to', icoElm.params.origPos.x + ' ' + icoElm.params.origPos.y + ' ' + _data2.default.navItemMouseClick.position.z], ['dur', '900'], ['easing', 'ease-out']]);
 		}
 	}, {
 		key: 'navItemFrontOut',
 		value: function navItemFrontOut(icoElm) {
-			// this.SpecificIn(icoElm, 'position', Data.navItemMouseClick.position, navItem.params);
 
 			_utils2.default.createAndSetAttributes('a-animation', icoElm.navItem, 'position', false, function () {}, [['attribute', 'position'], ['to', icoElm.params.origPos.x + ' ' + icoElm.params.origPos.y + ' ' + _data2.default.navItemMouseClick.position.z], ['dur', '900'], ['easing', 'ease-out']]);
+		}
+	}, {
+		key: 'showMap',
+		value: function showMap() {
+			if (!this.mapState) {
+				_utils2.default.createAndSetAttributes('a-animation', _data2.default.mapElement, 'opacity', false, function () {}, [['attribute', 'opacity'], ['from', '0'], ['to', '1'], ['dur', '1500'], ['fill', 'both'], ['easing', 'ease-out']]);
+				this.mapState = !this.mapState;
+			}
+		}
+	}, {
+		key: 'hideMap',
+		value: function hideMap() {
+			if (this.mapState) {
+				_utils2.default.createAndSetAttributes('a-animation', _data2.default.mapElement, 'opacity', false, function () {}, [['attribute', 'opacity'], ['from', '1'], ['to', '0'], ['dur', '1500'], ['fill', 'both'], ['easing', 'ease-out']]);
+				this.mapState = !this.mapState;
+			}
 		}
 	}]);
 
@@ -82948,8 +83265,8 @@ var Animate = function () {
 
 exports.default = new Animate();
 
-},{"./data":8,"./utils":9}],8:[function(require,module,exports){
-"use strict";
+},{"./data":9,"./utils":11}],9:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -82965,6 +83282,7 @@ var Data = function () {
 
 				this.navItemSelected = false;
 				this.icons = [];
+				this.navToSets = ['back', 'eat', 'recreation', 'health', 'home'];
 				this.navState = 'default';
 				this.navItemMouseOn = {
 						position: { x: "0", y: "0", z: "-1" },
@@ -82973,6 +83291,12 @@ var Data = function () {
 						scaleUp: "0.8 0.8 0.8"
 				};
 				this.navItemMouseClick = {
+						position: { x: "1", y: "1", z: "1" },
+						rotation: "0 0 0",
+						scale: "0.5 0.5 0.5",
+						scaleUp: "0.8 0.8 0.8"
+				};
+				this.navItemMouseClicked = {
 						position: { x: "1", y: "1", z: "1" },
 						rotation: "0 0 0",
 						scale: "0.5 0.5 0.5",
@@ -82992,8 +83316,14 @@ var Data = function () {
 		}
 
 		_createClass(Data, [{
-				key: "initData",
+				key: 'initData',
 				value: function initData() {
+						this.navHolder2 = document.querySelector('#navHolder2');
+						this.backbtn = document.querySelector('#backbtn');
+						this.roomenvironment = document.querySelector('#sky');
+						this.global_layout = document.querySelector('#global_layout');
+						this.restaurants_room = document.querySelector('#restaurants_room');
+						this.mapElement = document.querySelector('#mapPlane');
 						this.switchItemEl1 = document.querySelector('.item_select1');
 						this.navAssets = document.querySelectorAll('.navAsset');
 						this.navbtns = document.querySelectorAll('.navarrow');
@@ -83007,7 +83337,75 @@ var Data = function () {
 
 exports.default = new Data();
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _utils = require('./utils');
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _data = require('./data');
+
+var _data2 = _interopRequireDefault(_data);
+
+var _animate = require('./animate');
+
+var _animate2 = _interopRequireDefault(_animate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Navigator = function () {
+  function Navigator() {
+    _classCallCheck(this, Navigator);
+  }
+
+  _createClass(Navigator, [{
+    key: 'navMeTo',
+    value: function navMeTo(point) {
+      _animate2.default.showMap();
+      console.log(point);
+      switch (point) {
+        case _data2.default.navToSets[0]:
+          // Nav back
+          break;
+        case _data2.default.navToSets[1]:
+          // Nav eat
+          _data2.default.restaurants_room.setAttribute("visible", true);;
+          break;
+        case _data2.default.navToSets[2]:
+          // Nav recreation
+          _data2.default.global_layout.setAttribute("visible", false);
+          _data2.default.roomenvironment.setAttribute("src", "assets/images/places/Champions_360.jpg");
+          _data2.default.backbtn.setAttribute("visible", true);
+
+          break;
+        case _data2.default.navToSets[3]:
+          // Nav health
+          break;
+        case _data2.default.navToSets[4]:
+          // Nav home
+          break;
+      }
+    }
+  }, {
+    key: 'navToMap',
+    value: function navToMap() {}
+  }]);
+
+  return Navigator;
+}();
+
+exports.default = new Navigator();
+
+},{"./animate":8,"./data":9,"./utils":11}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -83093,4 +83491,4 @@ var Utils = function () {
 
 exports.default = new Utils();
 
-},{}]},{},[5,4]);
+},{}]},{},[6,5]);

@@ -26,11 +26,30 @@
         <img id="ico4" class="navAsset" src="assets/icons/4_Health.png">
         <img id="ico5" class="navAsset" src="assets/icons/5_Homes.png">
         <img id="ground" src="assets/images/cambridgemap.jpg">
+
+        <img id="room2" class="navAsset" src="assets/images/places/Bailey_n_Sage.png">
+        <img id="room1" class="navAsset" src="assets/images/places/Champions.png">
+        <img id="room3" class="navAsset" src="assets/images/places/CHipotle.png">
+        <img id="room4" class="navAsset" src="assets/images/places/Koch.png">
+        <img id="room5" class="navAsset" src="assets/images/places/Legal_Seafood.png">
+        <img id="room6" class="navAsset" src="assets/images/places/Sate Grill.png">
+        <img id="room7" class="navAsset" src="assets/images/places/Sebastians.png">
+        <img id="room8" class="navAsset" src="assets/images/places/The_muddy_Child.png">
+
+
+        <!-- 360 -->
+        <img id="room1_360" class="navAsset" src="assets/images/places/Champions_360.jpg">
+
+        <!--  -->
+        <a-mixin id="image" geometry="primitive: plane; height: 5; width: 5"
+                 material="shader: flat" look-at="[camera]"></a-mixin>
+        
       </a-assets>
-      
+      <a-entity id="global_layout">
+
       <!-- Camera + Cursor -->
       <a-entity position="0 0 0" rotation="0 0 0">
-        <a-camera id="player" class="camera" rotation="-20 -170 0">
+        <a-camera id="player" class="camera" rotation="-20 -170 0" look-controls camera>
           <a-cursor>
             <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
           </a-cursor>
@@ -51,7 +70,7 @@
 
       <!--  -->
 
-        <a-curvedimage id="tempItem" class='navItem' src="#ico1" height="0.650" position="0 1 0"  radius="3.680" theta-length="18.4" scale="1 1 1" rotation="0 -390 0" position="0 1.2 0" transparent="true" data-ico='back' data-state="default">
+        <a-curvedimage id="tempItem" class='navItem' src="#ico1" height="0.650" position="0 1 0"  radius="3.680" theta-length="18.4" scale="1 1 1" rotation="0 -390 0" position="0 1.2 0" transparent="true" data-navto='none' data-state="default">
           <a-animation class="rotation" attribute="rotation" from="0 -420 0" to="0 -390 0" dur="1200" delay="100"
                      fill="both"></a-animation>
           <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100"
@@ -72,18 +91,43 @@
       <!-- ToolTip -->
       <!-- <a-entity slice9="width: 2; height: 3; left: 690; right: 43; top: 838; bottom: 43; src: assets/images/Sculpture.png" position="0 1 -2"></a-entity> -->
 
-      <a-entity id="map" opacity="0">
-        <a-plane src="#ground" position="0 -1.5 2" rotation="-90 -180 0" scale="12 8 8" width="2" height="1.7" transparent="true" rotation="-90 -180 0">
-          <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100"
-         fill="both"></a-animation>
+      <a-entity id="map">
+        <a-plane id="mapPlane" src="#ground" position="0 -1.5 2" rotation="-90 -180 0" scale="12 8 8" width="2" height="1.7" opacity="0" transparent="true" rotation="-90 -180 0">
+          <!-- <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100" fill="both"></a-animation> -->
         </a-plane>
         <!-- <a-entity geometry="primitive: plane;" material="opacity: 0.9; transparent: true; src: url(assets/images/cambridgemap.jpg)" transparent="true" scale="12 8 8" rotation="-90 -180 0"> -->
         <!-- <a-image src="#ground" position="0 -1.5 -1" rotation="-80 0 0" fit-texture scale="2.0"> -->
       </a-entity>
 
+      <!-- Places NAV LAYOUT -->
+      <a-entity id="restaurants_room" layout="type: cube; radius: 12" visible="false" position="0 1.4 0">
+        <a-entity id="room1" mixin="image" material="src: #room1" billboard></a-entity>
+        <a-entity id="room2" mixin="image" material="src: #room2" billboard></a-entity>
+        <a-entity id="room3" mixin="image" material="src: #room3" billboard></a-entity>
+        <a-entity id="room4" mixin="image" material="src: #room4" billboard></a-entity>
+        <a-entity id="room5" mixin="image" material="src: #room5" billboard></a-entity>
+        <a-entity id="room6" mixin="image" material="src: #room6" billboard></a-entity>
+      </a-entity>
+       </a-entity>
+       <!-- / Global LAyout -->
+      <!-- / Places NAV LAYOUT -->
 
+
+      <!-- ROOOM LAYOUT -->
+        <!-- BACK BTN -->
+       <a-entity id="navHolder2" position="0 0 0" rotation="0 -20 0" visible="false">
+        <a-curvedimage id="backbtn" class='navItem' src="#ico1" height="0.650" position="0 1 0"  radius="3.680" theta-length="18.4" scale="1 1 1" rotation="0 -390 0" position="1 1.2 0" transparent="true" data-navto='none' data-state="default">
+          <a-animation class="rotation" attribute="rotation" from="0 -420 0" to="0 -390 0" dur="1200" delay="100"
+                     fill="both"></a-animation>
+          <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100"
+         fill="both"></a-animation>
+        </a-curvedimage>
+        <!-- / BACK BTN -->
+
+      <!-- / ICONS -->
+       </a-entity>
       
-      <a-sky color="#ECECEC" src="assets/images/Media_Lab_Lobby.jpg" phi-start='180'></a-sky>
+      <a-sky id="sky" color="#ECECEC" src="assets/images/Media_Lab_Lobby.jpg" phi-start='180'></a-sky>
       <a-light type="directional" color="#fff" intensity="0.2" position="-1 2 1"></a-light>
       <a-light type="ambient" color="#fff"></a-light>
     </a-scene>
