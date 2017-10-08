@@ -72,6 +72,15 @@ class MenuNavHandler{
 	}	
 
 	buildLayout(){
+		document.querySelector('#aroom1').addEventListener('click', () => {
+				Navigator.navToRoom1();
+				
+		});
+		Data.backbtn.addEventListener('click', () => {
+				Navigator.navToMap();
+				
+		});
+
 		
 	}
 }

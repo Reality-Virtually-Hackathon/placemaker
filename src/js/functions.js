@@ -12,6 +12,7 @@ import MenuNavHandler from './modules/MenuNavHandler'
 		Data.initData();
 	    MenuNavHandler.createMenuItems();
 	    MenuNavHandler.setupNavItemsEvents();
+	    MenuNavHandler.buildLayout();
 	}
 	
 

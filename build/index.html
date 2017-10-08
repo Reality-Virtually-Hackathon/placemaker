@@ -46,17 +46,6 @@
         
       </a-assets>
       <a-entity id="global_layout">
-
-      <!-- Camera + Cursor -->
-      <a-entity position="0 0 0" rotation="0 0 0">
-        <a-camera id="player" class="camera" rotation="-20 -170 0" look-controls camera>
-          <a-cursor>
-            <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-          </a-cursor>
-        </a-camera>
-      </a-entity>
-
-
       <!-- ICONS -->
       <a-entity id="navHolder" position="0 0 0" rotation="0 -20 0">
         <!--  -->
@@ -101,17 +90,17 @@
 
       <!-- Places NAV LAYOUT -->
       <a-entity id="restaurants_room" layout="type: cube; radius: 12" visible="false" position="0 1.4 0">
-        <a-entity id="room1" mixin="image" material="src: #room1" billboard></a-entity>
-        <a-entity id="room2" mixin="image" material="src: #room2" billboard></a-entity>
-        <a-entity id="room3" mixin="image" material="src: #room3" billboard></a-entity>
-        <a-entity id="room4" mixin="image" material="src: #room4" billboard></a-entity>
-        <a-entity id="room5" mixin="image" material="src: #room5" billboard></a-entity>
-        <a-entity id="room6" mixin="image" material="src: #room6" billboard></a-entity>
+        <a-entity id="aroom1" mixin="image" material="src: #room1" billboard></a-entity>
+        <a-entity id="aroom2" mixin="image" material="src: #room2" billboard></a-entity>
+        <a-entity id="aroom3" mixin="image" material="src: #room3" billboard></a-entity>
+        <a-entity id="aroom4" mixin="image" material="src: #room4" billboard></a-entity>
+        <a-entity id="aroom5" mixin="image" material="src: #room5" billboard></a-entity>
+        <a-entity id="aroom6" mixin="image" material="src: #room6" billboard></a-entity>
       </a-entity>
        </a-entity>
        <!-- / Global LAyout -->
       <!-- / Places NAV LAYOUT -->
-
+        
 
       <!-- ROOOM LAYOUT -->
         <!-- BACK BTN -->
@@ -126,7 +115,15 @@
 
       <!-- / ICONS -->
        </a-entity>
-      
+      <!-- Camera + Cursor -->
+      <a-entity position="0 0 0" rotation="0 0 0">
+        <a-camera id="player" class="camera" rotation="-20 -170 0" look-controls camera>
+          <a-cursor>
+            <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+          </a-cursor>
+        </a-camera>
+      </a-entity>
+
       <a-sky id="sky" color="#ECECEC" src="assets/images/Media_Lab_Lobby.jpg" phi-start='180'></a-sky>
       <a-light type="directional" color="#fff" intensity="0.2" position="-1 2 1"></a-light>
       <a-light type="ambient" color="#fff"></a-light>

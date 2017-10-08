@@ -83048,6 +83048,7 @@ console.log("functions runned ");window.functions = {};
 		_data2.default.initData();
 		_MenuNavHandler2.default.createMenuItems();
 		_MenuNavHandler2.default.setupNavItemsEvents();
+		_MenuNavHandler2.default.buildLayout();
 	};
 })(window);
 
@@ -83168,7 +83169,14 @@ var MenuNavHandler = function () {
 		}
 	}, {
 		key: 'buildLayout',
-		value: function buildLayout() {}
+		value: function buildLayout() {
+			document.querySelector('#aroom1').addEventListener('click', function () {
+				_navigator2.default.navToRoom1();
+			});
+			_data2.default.backbtn.addEventListener('click', function () {
+				_navigator2.default.navToMap();
+			});
+		}
 	}]);
 
 	return MenuNavHandler;
@@ -83378,14 +83386,12 @@ var Navigator = function () {
           break;
         case _data2.default.navToSets[1]:
           // Nav eat
-          _data2.default.restaurants_room.setAttribute("visible", true);;
+          if (_data2.default.navItemSelected) {
+            _data2.default.restaurants_room.setAttribute("visible", true);
+          }
           break;
         case _data2.default.navToSets[2]:
           // Nav recreation
-          _data2.default.global_layout.setAttribute("visible", false);
-          _data2.default.roomenvironment.setAttribute("src", "assets/images/places/Champions_360.jpg");
-          _data2.default.backbtn.setAttribute("visible", true);
-
           break;
         case _data2.default.navToSets[3]:
           // Nav health
@@ -83397,7 +83403,21 @@ var Navigator = function () {
     }
   }, {
     key: 'navToMap',
-    value: function navToMap() {}
+    value: function navToMap() {
+
+      _data2.default.global_layout.setAttribute("visible", true);
+      _data2.default.roomenvironment.setAttribute("src", "assets/images/Media_Lab_Lobby.jpg");
+      _data2.default.navHolder2.setAttribute("visible", false);
+      _data2.default.restaurants_room.setAttribute("visible", false);
+      _animate2.default.hideMap();
+    }
+  }, {
+    key: 'navToRoom1',
+    value: function navToRoom1() {
+      _data2.default.global_layout.setAttribute("visible", false);
+      _data2.default.roomenvironment.setAttribute("src", "assets/images/places/Champions_360.jpg");
+      _data2.default.navHolder2.setAttribute("visible", true);
+    }
   }]);
 
   return Navigator;

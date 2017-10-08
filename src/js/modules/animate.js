@@ -100,6 +100,7 @@ class Animate{
 	}
 
 
+
 }
 
 export default (new Animate);

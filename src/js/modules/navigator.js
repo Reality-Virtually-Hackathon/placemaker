@@ -17,14 +17,12 @@ class Navigator{
   			break;
   			case Data.navToSets[1]:
   			// Nav eat
-  				Data.restaurants_room.setAttribute("visible",true);;
+        if(Data.navItemSelected){
+  				Data.restaurants_room.setAttribute("visible",true);
+        }
   			break;
   			case Data.navToSets[2]:
   			// Nav recreation
-  				Data.global_layout.setAttribute("visible",false);
-  				Data.roomenvironment.setAttribute("src","assets/images/places/Champions_360.jpg");
-  				Data.navHolder2.setAttribute("visible",true);
-  			
   			break;
   			case Data.navToSets[3]:
   			// Nav health
@@ -39,7 +37,18 @@ class Navigator{
 
   	navToMap(){
 
+      Data.global_layout.setAttribute("visible",true);
+      Data.roomenvironment.setAttribute("src","assets/images/Media_Lab_Lobby.jpg");
+      Data.navHolder2.setAttribute("visible",false);
+      Data.restaurants_room.setAttribute("visible",false);
+      Animate.hideMap();
+
   	}
+    navToRoom1(){
+      Data.global_layout.setAttribute("visible",false);
+      Data.roomenvironment.setAttribute("src","assets/images/places/Champions_360.jpg");
+      Data.navHolder2.setAttribute("visible",true);
+    }
 
 }
 
