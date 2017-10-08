@@ -1,0 +1,6 @@
+{
+  "port": 3003,
+  "files": ["./build/*.*"],
+  "server": { "baseDir": "./build" }
+
+}

@@ -19,8 +19,9 @@ gulp.task('build-js', () => {
    return browserify({
             entries: [
               './src/js/modules.js',
-              './src/js/ashaders/*.js',
-              './src/js/components/*.js'
+              './src/js/functions.js'
+              // './src/js/ashaders/*.js',
+              // './src/js/components/*.js'
               ]})
     .bundle()  
     .pipe(source('bundle.js'))
@@ -40,7 +41,7 @@ gulp.task('default', () => {
     gulp.start('build-js');
   });
   watch('./**/*.html', () => {
-    gulp.start('copy-files-into-build');
+    // gulp.start('copy-files-into-build');
   });
 
 });

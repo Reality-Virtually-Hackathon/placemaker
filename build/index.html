@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PlaceMaker demo app</title>
+  <link rel="stylesheet" href="">
+  <script type="text/javascript" src="bundle.js?v=<?php echo uniqid(); ?>"></script>
+</head>
+<body>
+    <a-scene>
+
+      <a-assets>
+        <!-- 3D -->
+        <a-asset-item id="sofa-obj" src="assets/objects/sofa.obj"></a-asset-item>
+        <a-asset-item id="sofa-mtl" src="assets/objects/sofa.mtl"></a-asset-item>
+        <a-asset-item id="sculpture" src="assets/objects/RIT.DAE"></a-asset-item>
+        
+        <!-- IMAGES -->
+        <img id="ico1" class="navAsset" src="assets/icons/1_Back_Arrow.png">
+        <img id="ico2" class="navAsset" src="assets/icons/2_Eat.png">
+        <img id="ico3" class="navAsset" src="assets/icons/3_Recreation.png">
+        <img id="ico4" class="navAsset" src="assets/icons/4_Health.png">
+        <img id="ico5" class="navAsset" src="assets/icons/5_Homes.png">
+      </a-assets>
+
+      <!-- ICONS -->
+      <a-entity id="navHolder" scale="0.3 0.3 0.3" position="0 1 0">
+        <!--  -->
+        <a-curvedimage id="tempItem" class='navItem' src="#ico1" height="0.650" position="0 1 0"  radius="3.680" theta-length="18.4" scale="0.9 0.9 0.9" rotation="0 -390 0" position="0 1.2 0" transparent="true" data-ico='back' data-state="default">
+          <a-animation class="arotation" attribute="rotation" from="0 -420 0" to="0 -390 0" dur="1200" delay="100"
+                     fill="both"></a-animation>
+          <a-animation attribute="opacity" from="0"" to="1" dur="1200" delay="100"
+         fill="both"></a-animation>
+        </a-curvedimage>
+      <!-- / ICONS -->
+       </a-entity>
+       <!-- SCULPTURE -->
+      <a-entity>
+        <a-collada-model position="-3 0 -1.5" rotation="0 95 0" scale="2.15 2.15 2.15" src="#sculpture" class="cube" color="red" canvas-material="width:500;height:500"></a-collada-model>
+      </a-entity>
+       <!-- / SCULPTURE -->
+
+      <a-entity>
+        <a-obj-model src="#sofa-obj" mtl="#sofa-mtl" position="0 0.1 0" scale="1 1 1"></a-obj-model>
+      </a-entity>
+
+      <a-entity position="0 0 0" rotation="0 0 0">
+        <a-camera class="camera" rotation="20 -170 0">
+          <a-cursor>
+            <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
+          </a-cursor>
+        </a-camera>
+      </a-entity>
+      <a-sky color="#ECECEC" src="assets/images/Media_Lab_Lobby.jpg" phi-start='180'></a-sky>
+      <a-light type="directional" color="#fff" intensity="0.2" position="-1 2 1"></a-light>
+      <a-light type="ambient" color="#fff"></a-light>
+    </a-scene>
+  </body>
+  <script>
+    functions.init();
+  </script>
+</html>

@@ -4,7 +4,9 @@
   "description": "PlaceMaker combines the most valuable components of key web-based, self-guideed VR tours to offer a cost-effective method of connecting residents with their neighrborhoods, and highlighting that neighborhood's amenities in innovative and engaging ways. ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lite": "lite-server -c bs-config.json",
+    "gulp": "gulp",
+    "dev": "npm-run-all -p gulp lite"
   },
   "keywords": [
     "webvr",
@@ -40,8 +42,7 @@
             "es2015",
             "stage-2"
           ]
-        },
-        "vueify"
+        }
       ]
     ]
   }
